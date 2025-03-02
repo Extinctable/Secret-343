@@ -11,7 +11,10 @@ function Home() {
 }
 
 function About() {
-  return <h2>About Page</h2>;
+  return <div>
+  <h2>About Page</h2>
+  <AboutUs /> {}
+</div>;
 }
 
 function Contact() {
