@@ -2,6 +2,7 @@ const express = require('express');
 const { Pool } = require('pg');
 const app = express();
 const cors = require("cors");
+const neo4j = require('neo4j-driver');
 
 // Enable CORS for all routes
 app.use(cors());
@@ -39,6 +40,23 @@ const createUserTable = async () => {
   console.log("User table created successfully.");
 };
 
+
+
+
+const driver = neo4j.driver(
+    'neo4j://localhost:7687', // Change if using a remote database
+    neo4j.auth.basic('neo4j', 'message88')
+);
+
+console.log("Connected to Neo4j!");
+
+
+
+
+
+
+
+
 // Add a user
 const addUser = async (first, last, password, description, email) => {
   const insertQuery = `
@@ -50,12 +68,29 @@ const addUser = async (first, last, password, description, email) => {
   try {
     const result = await db.query(insertQuery, [first, last, password, description, email]);
     const newUser = result.rows[0];
-    console.log("User added successfully:", newUser);
+    console.log("User added successfully to SQL:", newUser);
+    await addToNeo4j(newUser);
   } catch (err) {
     console.error("Error adding user:", err);
   }
 };
-
+//neo4j adding user
+const addToNeo4j = async ({ id, first, last, description, email }) => {
+  const session = driver.session();
+  try {
+      const cypherQuery = `
+          MERGE (u:User {id: $id})
+          SET u.first = $first, u.last = $last, u.description = $description, u.email = $email
+          RETURN u;
+      `;
+      const result = await session.run(cypherQuery, { id, first, last, description, email });
+      console.log("User added to Neo4j:", result.records[0].get('u'));
+  } catch (error) {
+      console.error("Error adding user to Neo4j:", error);
+  } finally {
+      await session.close();
+  }
+};
 // Check user credentials
 const checkUserCredentials = async (email, password) => {
   const query = `
@@ -118,7 +153,7 @@ const first = "Platini";
 const last = "Danilo";
 const password = "1"; // Ideally, hash the password before storing it
 const description = "Goats";
-const email = "ronaldo88999@example.com";
+const email = "1@example.com";
 
 // Create the user table when the server starts
 createUserTable();
@@ -126,3 +161,6 @@ addUser( first, last, password, description, email);
 
 // Export the database connection and functions
 module.exports = { db, checkUserCredentials };
+
+
+driver.close();

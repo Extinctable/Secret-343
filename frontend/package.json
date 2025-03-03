@@ -11,6 +11,7 @@
     "buffer": "^6.0.3",
     "cors": "^2.8.5",
     "crypto-browserify": "^3.12.1",
+    "neo4j-driver": "^5.28.1",
     "path-browserify": "^1.0.1",
     "pg": "^8.13.3",
     "querystring-es3": "^0.2.1",

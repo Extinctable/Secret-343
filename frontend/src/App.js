@@ -18,6 +18,14 @@ function About() {
 }
 
 function Contact() {
+  const redirectToAnotherPage = true; // Set this to the condition for redirecting
+//select* from users;
+  if (redirectToAnotherPage) {
+    // This will redirect to '/some-other-page' immediately after rendering Contact
+    return <Navigate to="/Contact.js" />;
+  }
+
+
   return <h2>Contact Page</h2>;
 }
 
