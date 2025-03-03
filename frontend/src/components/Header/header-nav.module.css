@@ -1,0 +1,99 @@
+@import url('./styles/config/config.css');
+
+.nav {
+    position: relative;
+}
+
+/* Styles for 'right' and 'center' navigation positions on smaller screens */
+@media screen and (max-width: 749px) { /* Assuming $medium-down is 750px - 1 */
+    [data-nav-position="right"] .nav,
+    [data-nav-position="center"] .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: var(--color-white);
+        pointer-events: none;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9;
+        opacity: 0;
+    }
+
+    /* Support for blur effect */
+    @supports (backdrop-filter: blur(10px)) {
+        [data-nav-position="right"] .nav,
+        [data-nav-position="center"] .nav {
+            background: rgba(var(--color-white), 0.6);
+            backdrop-filter: blur(10px);
+        }
+    }
+
+    [data-nav-position="right"] .nav.open,
+    [data-nav-position="center"] .nav.open {
+        pointer-events: auto;
+    }
+}
+
+/* Styles for 'overlay' navigation */
+[data-nav-position="overlay"] .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-white);
+    pointer-events: none;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    z-index: 9;
+    opacity: 0;
+}
+
+/* Support for blur effect */
+@supports (backdrop-filter: blur(10px)) {
+    [data-nav-position="overlay"] .nav {
+        background: rgba(var(--color-white), 0.6);
+        backdrop-filter: blur(10px);
+    }
+}
+
+[data-nav-position="overlay"] .nav.open {
+    pointer-events: auto;
+}
+
+/* Styles for larger screens */
+@media screen and (min-width: 990px) { /* Assuming $large-up is 990px */
+    [data-nav-position="right"] .nav,
+    [data-nav-position="center"] .nav {
+        place-self: center;
+        pointer-events: auto;
+    }
+
+    [data-nav-position="center"] .nav {
+        grid-column: 2 / 3;
+    }
+
+    [data-nav-position="right"] .nav {
+        justify-self: end;
+    }
+}
+
+/* Navigation item styles */
+.nav__item {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--color-black);
+    letter-spacing: 2.22px;
+    text-align: left;
+    text-transform: uppercase;
+    margin: 24px;
+}

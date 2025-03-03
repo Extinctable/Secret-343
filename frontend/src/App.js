@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "react-router-dom";
 
+import HeaderMain from "./components/Header/HeaderMain";
 import NavBar from "./components/NavBar"; // The NavBar
 import LoginForm from "./components/LoginForm"; // The LoginForm
 import AboutUs from "./components/AboutUsPage/AboutUs";
@@ -62,6 +63,8 @@ function App() {
 
         {/* About Us is separate and renders on its own */}
         <Route path="/about-us" element={<AboutUs />} />
+
+        <Route path="header" element={<HeaderMain />} />
       </Routes>
     </Router>
   );
