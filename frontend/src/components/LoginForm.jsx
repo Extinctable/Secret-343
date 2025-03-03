@@ -1,15 +1,48 @@
 import React, { useState } from "react";
 import "./LoginForm.css"; // Import the CSS file
+import { useNavigate } from "react-router-dom"; 
+// import { checkUserCredentials } from "../server";
+ 
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate(); 
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log("Email:", email);
     console.log("Password:", password);
+
+    // Make an API call to check credentials
+    try {
+      const response = await fetch("http://localhost:5002/check-credentials", {//  /check-credentials
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+      
+      // Check if the credentials are valid
+      if (response.ok) {
+        console.log("Login successful!");
+        navigate("/home"); // Redirect to the home page on successful login
+      } else {
+        setErrorMessage(data.message || "Invalid email or password."); // Set the error message if login fails
+      }
+    } catch (err) {
+      console.error("Error checking credentials:", err);
+      setErrorMessage("An error occurred. Please try again.");
+    }
   };
+
 
   return (
 <div
