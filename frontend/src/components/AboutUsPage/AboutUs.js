@@ -1,17 +1,18 @@
 import React from "react";
 import "./AboutUs.css"; 
+import Main from "../Header/HeaderMain";
 
 
 const AboutUs = () => {
   const teamMembers = [
     {
       name: "Massimo Caruso",
-      role: "CEO & Founder",
+      role: "CEO & Full Stack Engineer",
       description: "Massimo is the visionary behind our team. He oversees all of our code, fixes all of our bugs and manages the repository as it were his own child.",
     },
     {
       name: "Abdullah Taha",
-      role: "Full stack Engineer",
+      role: "Full Stack Engineer",
       description: "Abdullah is a third year software engineering student with a knack for developing cutting edge technology.",
     },
     {
@@ -39,8 +40,8 @@ const AboutUs = () => {
   return (
     
     <div className="about-us">
-      <div className="header">
-        
+      <div className="about-us-header">
+        < Main />
       </div>
       <section className="company-description">
         <h1>About Us</h1>
