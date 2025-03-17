@@ -40,9 +40,10 @@ const AboutUs = () => {
   return (
     
     <div className="about-us">
-      <div className="about-us-header">
+       {/* <div className="about-us-header">
         < Main />
       </div>
+      */}
       <section className="company-description">
         <h1>About Us</h1>
         <p>

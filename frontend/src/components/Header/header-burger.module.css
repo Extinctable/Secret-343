@@ -11,6 +11,10 @@
     align-self: center;
     justify-self: end;
     cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
 }
 
 /* Hide burger menu for large screens */

@@ -3,7 +3,6 @@
     font-family: Arial, sans-serif;
     align-items: center;
     margin: auto;
-    background-color: yellowgreen;
   }
 
   .about-us-header {
@@ -17,7 +16,7 @@
   .company-description {
     text-align: center;
     margin-bottom: 40px;
-    margin-top: 120px; /*-825px with the header*/
+    /* margin-top: 120px; /*-825px with the header*/
     
   }
   
