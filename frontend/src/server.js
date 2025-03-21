@@ -44,7 +44,7 @@ const createUserTable = async () => {
 
 
 const driver = neo4j.driver(
-    'neo4j://localhost:7687', // Change if using a remote database
+    'neo4j://localhost:7689', // Change if using a remote database
     neo4j.auth.basic('neo4j', 'message88')
 );
 
